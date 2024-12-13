@@ -6,13 +6,6 @@ pipeline {
         jdk 'java'
     }
 
-    environment {
-        REMOTE_SERVER = '54.86.116.118'    
-        REMOTE_USER = 'ubuntu'             
-        REMOTE_PATH = '/home/user/deployments/myapp/' 
-        SSH_KEY_ID = 'ssh-agent'      
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -24,14 +17,40 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Clean') {
             steps {
                 script {
-                    // Automatically detect the OS and use the appropriate command
+                    // Clean up the workspace
                     if (isUnix()) {
-                        sh 'mvn package'
+                        sh 'mvn clean'
                     } else {
-                        bat 'mvn package'
+                        bat 'mvn clean'
+                    }
+                }
+            }
+        }
+
+        stage('Validate') {
+            steps {
+                script {
+                    // Validate the project (checks for correct configuration)
+                    if (isUnix()) {
+                        sh 'mvn validate'
+                    } else {
+                        bat 'mvn validate'
+                    }
+                }
+            }
+        }
+
+        stage('Compile') {
+            steps {
+                script {
+                    // Compile the source code of the project
+                    if (isUnix()) {
+                        sh 'mvn compile'
+                    } else {
+                        bat 'mvn compile'
                     }
                 }
             }
@@ -50,49 +69,51 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Package') {
             steps {
-                sshagent(credentials: [SSH_KEY_ID]) {
-                    script {
-                        // Deploy the artifact to the remote server
-                        if (isUnix()) {
-                            // Use SCP to copy the JAR to the remote server and SSH to execute the deployment command
-                            sh """
-                                scp target/your-artifact.jar ${REMOTE_USER}@${REMOTE_SERVER}:${REMOTE_PATH}
-                                ssh ${REMOTE_USER}@${REMOTE_SERVER} 'cd ${REMOTE_PATH} && java -jar your-artifact.jar'
-                            """
-                        } else {
-                            // Use PSCP and PLINK for Windows-based Jenkins agent
-                            bat """
-                                pscp target\\your-artifact.jar ${REMOTE_USER}@${REMOTE_SERVER}:${REMOTE_PATH}
-                                plink ${REMOTE_USER}@${REMOTE_SERVER} "cd ${REMOTE_PATH} && java -jar your-artifact.jar"
-                            """
-                        }
+                script {
+                    // Package the compiled code into a JAR or WAR file
+                    if (isUnix()) {
+                        sh 'mvn package'
+                    } else {
+                        bat 'mvn package'
                     }
                 }
             }
         }
 
-        stage('Clean') {
+        stage('Verify') {
             steps {
                 script {
-                    // Clean up the workspace
+                    // Verify the project after packaging
                     if (isUnix()) {
-                        sh 'mvn clean'
+                        sh 'mvn verify'
                     } else {
-                        bat 'mvn clean'
+                        bat 'mvn verify'
                     }
                 }
             }
         }
-    }
+
+        stage('Install') {
+            steps {
+                script {
+                    // Install the package into the local repository
+                    if (isUnix()) {
+                        sh 'mvn install'
+                    } else {
+                        bat 'mvn install'
+                    }
+                }
+            }
+        }
 
     post {
         success {
-            echo 'Build and deployment successful!'
+            echo 'Build and all Maven lifecycle phases completed successfully!'
         }
         failure {
-            echo 'Build or deployment failed.'
+            echo 'Build or Maven lifecycle phase failed.'
         }
         always {
             cleanWs()
