@@ -57,13 +57,13 @@ pipeline {
                         // Deploy the artifact to the remote server
                         if (isUnix()) {
                             sh """
-                               scp -i /c/Users/User/Downloads/simha-1.pem target/jb-hello-world-maven-0.2.0.jar ubuntu@ec2-54-80-56-56.compute-1.amazonaws.com:/var/www/html/myapp
-                               ssh -i /c/Users/User/Downloads/simha-1.pem ubuntu@ec2-54-80-56-56.compute-1.amazonaws.com 'cd /var/www/html/myapp && java -jar jb-hello-world-maven-0.2.0.jar'
+                               scp -i /home/ubuntu/.ssh/id_ed25519 target/jb-hello-world-maven-0.2.0.jar ubuntu@ec2-54-80-56-56.compute-1.amazonaws.com:/var/www/html/myapp
+                               ssh -i /home/ubuntu/.ssh/id_ed25519 ubuntu@ec2-54-80-56-56.compute-1.amazonaws.com 'cd /var/www/html/myapp && java -jar jb-hello-world-maven-0.2.0.jar'
                             """
                         } else {
                             bat """
-                               pscp -i C:\\Users\\User\\Downloads\\simha-1.pem target\\jb-hello-world-maven-0.2.0.jar ubuntu@ec2-54-80-56-56.compute-1.amazonaws.com:/var/www/html/myapp
-                               plink -i C:\\Users\\User\\Downloads\\simha-1.pem ubuntu@ec2-54-80-56-56.compute-1.amazonaws.com "cd /var/www/html/myapp && java -jar jb-hello-world-maven-0.2.0.jar"
+                               pscp -i /home/ubuntu/.ssh/id_ed25519 target\\jb-hello-world-maven-0.2.0.jar ubuntu@ec2-54-80-56-56.compute-1.amazonaws.com:/var/www/html/myapp
+                               plink -i /home/ubuntu/.ssh/id_ed25519 ubuntu@ec2-54-80-56-56.compute-1.amazonaws.com "cd /var/www/html/myapp && java -jar jb-hello-world-maven-0.2.0.jar"
                             """
                         }
                     }
