@@ -52,18 +52,18 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sshagent(credentials: [SSH_KEY_ID]) {
+                sshagent(credentials: ['ssh-agent']) {
                     script {
                         // Deploy the artifact to the remote server
                         if (isUnix()) {
                             sh """
-                                scp target/jb-hello-world-maven-0.2.0.jar ubuntu@54.80.56.56:/var/www/html/myapp
-                                ssh ubuntu@54.80.56.56 'cd /var/www/html/myapp && java -jar jb-hello-world-maven-0.2.0.jar'
+                               scp -i /c/Users/User/Downloads/simha-1.pem target/jb-hello-world-maven-0.2.0.jar ubuntu@ec2-54-80-56-56.compute-1.amazonaws.com:/var/www/html/myapp
+                               ssh -i /c/Users/User/Downloads/simha-1.pem ubuntu@ec2-54-80-56-56.compute-1.amazonaws.com 'cd /var/www/html/myapp && java -jar jb-hello-world-maven-0.2.0.jar'
                             """
                         } else {
                             bat """
-                                pscp target\\jb-hello-world-maven-0.2.0.jar ubuntu@54.80.56.56:/var/www/html/myapp
-                                plink ubuntu@54.80.56.56 "cd /var/www/html/myapp && java -jar jb-hello-world-maven-0.2.0.jar"
+                               pscp -i C:\\Users\\User\\Downloads\\simha-1.pem target\\jb-hello-world-maven-0.2.0.jar ubuntu@ec2-54-80-56-56.compute-1.amazonaws.com:/var/www/html/myapp
+                               plink -i C:\\Users\\User\\Downloads\\simha-1.pem ubuntu@ec2-54-80-56-56.compute-1.amazonaws.com "cd /var/www/html/myapp && java -jar jb-hello-world-maven-0.2.0.jar"
                             """
                         }
                     }
