@@ -7,7 +7,7 @@ pipeline {
     }
 
     environment {
-        REMOTE_SERVER = '54.80.56.56'    // IP or hostname of the target server
+        REMOTE_SERVER = '54.224.248.26'    // IP or hostname of the target server
         REMOTE_USER = 'ubuntu'             // SSH username for the target server
         REMOTE_PATH = '/var/www/html/myapp' // The path where you want to deploy
         SSH_KEY_ID = 'ssh-agent'      // Jenkins credentials ID for the SSH key
