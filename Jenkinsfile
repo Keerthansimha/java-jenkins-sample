@@ -107,20 +107,6 @@ pipeline {
                 }
             }
         }
-
-      //  stage('Site') {
-        //    steps {
-          //      script {
-                    // Generate the site documentation
-            //        if (isUnix()) {
-              //          sh 'mvn site'
-                //    } else {
-                  //      bat 'mvn site'
-                  //  }
-               // }
-           // }
-       // }
-//
     }
 
     post {
