@@ -9,7 +9,6 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -38,6 +37,17 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                     <repositoryId>maven_deploy</repositoryId>
+                     <url>https://github.com/Keerthansimha/maven_deploy</url>
+                     <uniqueVersion>false</uniqueVersion>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.4.0</version>
                 <executions>
@@ -47,31 +57,12 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <transformer>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <transformers>
+                                <transformer
+                                    implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>hello.HelloWorld</mainClass>
                                 </transformer>
-                            </transformer>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- Deploy to GitHub Packages -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>3.1.1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>deploy</goal>
-                        </goals>
-                        <configuration>
-                            <repository>
-                                <id>maven_deploy</id>
-                                <url>https://maven.pkg.github.com/Keerthansimha/maven_deploy</url>
-                            </repository>
+                            </transformers>
                         </configuration>
                     </execution>
                 </executions>
@@ -82,21 +73,7 @@
     <distributionManagement>
         <repository>
             <id>maven_deploy</id>
-            <name>Keerthansimha</name>
             <url>https://maven.pkg.github.com/Keerthansimha/maven_deploy</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
         </repository>
     </distributionManagement>
-
-    <scm>
-        <connection>scm:git:git://github.com/Keerthansimha/maven_deploy.git</connection>
-        <developerConnection>scm:git:git@github.com:Keerthansimha/maven_deploy.git</developerConnection>
-        <url>https://github.com/Keerthansimha/maven_deploy</url>
-    </scm>
-
 </project>
