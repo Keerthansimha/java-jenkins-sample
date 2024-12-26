@@ -61,7 +61,7 @@
 
     <distributionManagement>
         <repository>
-            <id>release-repo</id>
+            <id>maven_deploy</id>
             <url>https://maven.pkg.github.com/Keerthansimha/maven_deploy</url>
         </repository>
     </distributionManagement>
