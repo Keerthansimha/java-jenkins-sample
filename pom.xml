@@ -62,7 +62,7 @@
     <distributionManagement>
         <repository>
             <id>maven_deploy</id>
-            <url>https://maven.pkg.github.com/Keerthansimha/maven_deploy</url>
+            <url>https://github.com/Keerthansimha/maven_deploy</url>
         </repository>
     </distributionManagement>
 </project>
