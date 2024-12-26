@@ -67,11 +67,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <distributionManagement>
-        <repository>
-            <id>maven_deploy</id>
-            <url>https://github.com/Keerthansimha/maven_deploy.git</url>
-        </repository>
-    </distributionManagement>
 </project>
