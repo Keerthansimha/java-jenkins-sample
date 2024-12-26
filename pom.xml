@@ -69,7 +69,7 @@
                         </goals>
                         <configuration>
                             <repository>
-                                <id>github</id>
+                                <id>maven_deploy</id>
                                 <url>https://maven.pkg.github.com/Keerthansimha/maven_deploy</url>
                             </repository>
                         </configuration>
@@ -81,8 +81,8 @@
 
     <distributionManagement>
         <repository>
-            <id>github-repo</id>
-            <name>GitHub Maven Repository</name>
+            <id>maven_deploy</id>
+            <name>Keerthansimha</name>
             <url>https://maven.pkg.github.com/Keerthansimha/maven_deploy</url>
             <releases>
                 <enabled>true</enabled>
