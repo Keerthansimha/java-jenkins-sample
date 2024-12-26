@@ -68,7 +68,7 @@
     <distributionManagement>
         <repository>
             <id>maven_deploy</id>
-            <url>https://github.com/Keerthansimha/maven_deploy.git</url>
+            <url>https://github.com/Keerthansimha/maven_deploy/repository/maven-releases</url>
         </repository>
     </distributionManagement>
 </project>
