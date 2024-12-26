@@ -77,6 +77,9 @@
             <id>maven_deploy</id>
             <name>Keerthansimha</name>
             <url>https://maven.pkg.github.com/Keerthansimha/maven_deploy</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
         </repository>
     </distributionManagement>
 
