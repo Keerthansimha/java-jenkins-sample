@@ -48,8 +48,7 @@
                         </goals>
                         <configuration>
                             <transformer>
-                                <transformer
-                                    implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>hello.HelloWorld</mainClass>
                                 </transformer>
                             </transformer>
@@ -57,18 +56,47 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Deploy to GitHub Packages -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                        <configuration>
+                            <repository>
+                                <id>github</id>
+                                <url>https://maven.pkg.github.com/Keerthansimha/maven_deploy</url>
+                            </repository>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
-    
+
     <distributionManagement>
         <repository>
-            <id>maven_deploy</id>
-            <name>Keerthansimha</name>
+            <id>github-repo</id>
+            <name>GitHub Maven Repository</name>
             <url>https://maven.pkg.github.com/Keerthansimha/maven_deploy</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
     </distributionManagement>
+
+    <scm>
+        <connection>scm:git:git://github.com/Keerthansimha/maven_deploy.git</connection>
+        <developerConnection>scm:git:git@github.com:Keerthansimha/maven_deploy.git</developerConnection>
+        <url>https://github.com/Keerthansimha/maven_deploy</url>
+    </scm>
 
 </project>
