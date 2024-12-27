@@ -25,7 +25,7 @@
         <repository>
             <id>github</id>
             <name>new_demo_maven</name>
-            <url>https://maven.pkg.github.com/Keerthansimha/new_demo_maven</url>
+            <url>https://github.com/Keerthansimha/new_demo_maven.git</url>
         </repository>
     </distributionManagement>
     <build>
@@ -46,7 +46,7 @@
                 <version>3.1.1</version>
                 <configuration>
                     <repositoryId>new_demo_maven</repositoryId>
-                    <url>https://maven.pkg.github.com/Keerthansimha/new_demo_maven</url>
+                    <url>https://github.com/Keerthansimha/new_demo_maven.git</url>
                 </configuration>
             </plugin>
 
