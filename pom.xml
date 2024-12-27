@@ -23,7 +23,7 @@
     </dependencies>
     <distributionManagement>
         <repository>
-            <id>maven_deploy</id>
+            <id>github</id>
             <url>https://github.com/Keerthansimha/maven_deploy.git</url>
         </repository>
     </distributionManagement>
