@@ -24,8 +24,8 @@
     <distributionManagement>
         <repository>
             <id>github</id>
-            <name>maven_deploy</name>
-            <url>https://github.com/Keerthansimha/maven_deploy.git</url>
+            <name>new_demo_maven</name>
+            <url>https://github.com/Keerthansimha/new_demo_maven.git</url>
         </repository>
     </distributionManagement>
     <build>
@@ -45,8 +45,8 @@
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>3.1.1</version>
                 <configuration>
-                    <repositoryId>maven_deploy</repositoryId>
-                    <url>https://github.com/Keerthansimha/maven_deploy.git</url>
+                    <repositoryId>new_demo_maven</repositoryId>
+                    <url>https://github.com/Keerthansimha/new_demo_maven.git</url>
                 </configuration>
             </plugin>
 
