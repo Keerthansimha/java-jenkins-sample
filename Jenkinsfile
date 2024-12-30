@@ -9,7 +9,7 @@ pipeline {
     }
 
     environment {
-        REMOTE_SERVER = '54.226.3.196'    // IP or hostname of the target server
+        REMOTE_SERVER = '54.163.57.219'    // IP or hostname of the target server
         REMOTE_USER = 'ubuntu'             // SSH username for the target server
         REMOTE_PATH = '/var/www/html/myapp' // The path where you want to deploy
         SSH_KEY_ID = 'ssh-agent'      // Jenkins credentials ID for the SSH key
@@ -59,8 +59,8 @@ pipeline {
                         // Deploy the artifact to the remote server
                         if (isUnix()) {
                             sh """
-                               scp  -i /home/ubuntu/.ssh/id_ed25519 /var/lib/jenkins/workspace/java_pipeline/target/jb-hello-world-maven-0.2.0.jar ubuntu@ec2-54-226-3-196.compute-1.amazonaws.com:/var/www/html/myapp
-                               ssh  -i /home/ubuntu/.ssh/id_ed25519 ubuntu@ec2-54-226-3-196.compute-1.amazonaws.com 
+                               scp  -i /home/ubuntu/.ssh/id_ed25519 /var/lib/jenkins/workspace/java_pipeline/target/jb-hello-world-maven-0.2.0.jar  ubuntu@ec2-54-163-57-219.compute-1.amazonaws.com:/var/www/html/myapp
+                               ssh  -i /home/ubuntu/.ssh/id_ed25519  ubuntu@ec2-54-163-57-219.compute-1.amazonaws.com
                             """
                         } else {
                             bat """
