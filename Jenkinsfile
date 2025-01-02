@@ -1,8 +1,6 @@
 pipeline {
-   agent {
-        label 'maven-project' // Replace with your agent's label
-}
-
+   agent any
+   
     tools {
         maven 'maven'
         jdk 'java'
