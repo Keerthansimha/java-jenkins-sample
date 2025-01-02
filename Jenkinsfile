@@ -17,9 +17,9 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout([$class: 'GitSCM', 
-                    branches: [[name: '*/main']], 
+                    branches: [[name: '*/deploy']], 
                     extensions: [], 
-                    userRemoteConfigs: [[credentialsId: 'github-access', url: 'https://github.com/Keerthansimha/java-jenkins.git']]
+                    userRemoteConfigs: [[credentialsId: 'github-access', url: 'https://github.com/Keerthansimha/java-jenkins-sample.git']]
                 ])
             }
         }
