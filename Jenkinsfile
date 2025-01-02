@@ -98,12 +98,4 @@ pipeline {
             cleanWs()
         }
     }
-
-    stages {
-        stage('Trigger Another Job') {
-            steps {
-                build job: 'testing-pipelne', wait: false
-            }
-        }
-    }
 }
