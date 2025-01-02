@@ -1,13 +1,6 @@
 pipeline {
     agent {
         label 'maven-project' // Replace with your agent's label
-        stages {
-        stage('Trigger Another Job') {
-            steps {
-                build job: 'testing-pipelne', wait: false
-            }
-        }
-    }
 }
 
     tools {
@@ -103,6 +96,14 @@ pipeline {
         }
         always {
             cleanWs()
+        }
+    }
+
+    stages {
+        stage('Trigger Another Job') {
+            steps {
+                build job: 'testing-pipelne', wait: false
+            }
         }
     }
 }
