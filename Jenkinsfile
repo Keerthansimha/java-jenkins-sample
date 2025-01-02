@@ -1,7 +1,7 @@
 pipeline {
     agent {
         label 'maven-project' // Replace with your agent's label
-}
+    }
 
     tools {
         maven 'maven'
@@ -12,7 +12,7 @@ pipeline {
         REMOTE_SERVER = '54.163.57.219'    // IP or hostname of the target server
         REMOTE_USER = 'ubuntu'             // SSH username for the target server
         REMOTE_PATH = '/var/www/html/myapp' // The path where you want to deploy
-        SSH_KEY_ID = 'ssh-agent'      // Jenkins credentials ID for the SSH key
+        SSH_KEY_ID = 'ssh-agent'           // Jenkins credentials ID for the SSH key
     }
 
     stages {
@@ -29,7 +29,6 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Automatically detect the OS and use the appropriate command
                     if (isUnix()) {
                         sh 'mvn package'
                     } else {
@@ -42,7 +41,6 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    // Run unit tests
                     if (isUnix()) {
                         sh 'mvn test'
                     } else {
@@ -56,7 +54,6 @@ pipeline {
             steps {
                 sshagent(credentials: ['ssh-agent']) {
                     script {
-                        // Deploy the artifact to the remote server
                         if (isUnix()) {
                             sh """
                                scp  -i /home/ubuntu/.ssh/id_ed25519 /var/lib/jenkins/workspace/java_pipeline/target/jb-hello-world-maven-0.2.0.jar  ubuntu@ec2-54-163-57-219.compute-1.amazonaws.com:/var/www/html/myapp
@@ -76,12 +73,22 @@ pipeline {
         stage('Clean') {
             steps {
                 script {
-                    // Clean up the workspace
                     if (isUnix()) {
                         sh 'mvn clean'
                     } else {
                         bat 'mvn clean'
                     }
+                }
+            }
+        }
+
+        stage('Trigger Next Job') {
+            steps {
+                script {
+                    // Trigger another Jenkins job
+                    build job: 'testing-pipelne', parameters: [
+                        string(name: 'DEPLOY_STATUS', value: 'success')
+                    ]
                 }
             }
         }
