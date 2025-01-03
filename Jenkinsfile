@@ -57,7 +57,7 @@ pipeline {
                         // Deploy the artifact to the remote server
                         if (isUnix()) {
                             sh """
-                               scp  -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null /home/ubuntu/.ssh/id_ed25519 /opt/jenkins/workspace/testing-pipelne/target/jb-hello-world-maven-0.2.0.jar  ubuntu@ec2-34-228-75-207.compute-1.amazonaws.com:/var/www/html/myapp
+                               scp  -i /home/ubuntu/.ssh/id_ed25519 /var/lib/jenkins/workspace/java_pipeline/target/jb-hello-world-maven-0.2.0.jar  ubuntu@ec2-34-228-75-207.compute-1.amazonaws.com:/var/www/html/myapp
                                ssh  -i home/ubuntu/.ssh/id_ed25519  ubuntu@ec2-34-228-75-207.compute-1.amazonaws.com
                             """
                         } else {
