@@ -1,5 +1,5 @@
 pipeline {
-    gent {
+    agent {
         label 'ssh-agent' // Replace with your agent's label
 }
    
